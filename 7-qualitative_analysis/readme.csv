@@ -1,0 +1,26 @@
+Open Codes,Description
+UNINFORMATIVE,Content that doesn't provide any significant or relevant information
+HUMAN-AI COMPARISON,Participant analyzes differences and similarities between own's decisions and AI predictions
+HUMAN KNOWLEDGE,"Participant makes decisions based solely on own intuition, wisdom, or experience"
+HUMAN KNOWLEDGE 1ST & AI ADVICE 2ND,"Participant makes decision based on own's intuition and experience first, supplemented by AI advice or suggestions"
+AI ADVICE 1ST & HUMAN CONFIRM 2ND,Participant seeks advice from AI first and then confirms with own's knowledge 
+AI ADVICE WHEN HARD,"Participant seeks advice from AI only and specifically in challenging or complex scenarios (e.g., blurry images, etc.)"
+TRUST AI PREDICTION(S),Participant has confidence in the prediction made by AI
+TRUST AI (RANKING OR CONFIDENCE),"Participant relies on AI's ranked suggestions or its confidence level in predictions. Participant mentions looking only at top predictions in RAPS and Top-10, while in Top-1 referring to specific confidence percentages"
+TOP PREDICTION FALLACY,"Participant expects to see the true answer in top predictions, but they believe the top prediction is wrong "
+DISAPPOINTED AT AI,Participant specifically mentions dissatisfaction with AI's performance and does not trust AI's prediction
+SEARCH,Participant performs a general search without specifying
+SEARCH (BY DROPDOWN),Participant types keywords in the input field and refers to the dropdown for matches
+SEARCH (BY KEYWORD),"Participant clicks ""Search"" to view a hierarchy tree that highlights matching categories"
+SEARCH (BY AI LABEL),Participant clicks an AI-predicted label for a bottom-up search
+SEARCH (HIERARCHY NETWORK),Participant expands or subtracts nodes/categories and navigates through the provided hierarchy network
+ELIMINATION,Participant tries to narrow down their options (to search in) by elimination
+REPRESENTATIVE IMAGES,Participant compares the task image against the given label-representative images
+COLOR & SURROUNDINGS,"Participant relies on color, shapes, sizes, and surrounding objects to figure out the correct label"
+,
+,
+Conditions,
+baseline,No AI prediction
+top1,Top-1 prediction with softmax
+top10,Top-10 predictions with softmax
+raps,Conformal prediction set (without softmax)

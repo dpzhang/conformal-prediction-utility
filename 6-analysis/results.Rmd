@@ -1,0 +1,182 @@
+---
+title: "Evaluating the Utility of Conformal Prediction Sets for AI-Advised Image Labeling"
+subtitle: "Supplemental Material"
+author: "Dongping Zhang, Angelos Chatzimparmpas, Negar Kamali, and Jessica Hullman"
+output: bookdown::html_document2
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(magrittr)
+library(tidyr)
+library(brms)
+library(tidybayes)
+library(broom)
+library(broom.mixed)
+library(emmeans)
+library(patchwork)
+library(stringr)
+library(tidyr)
+library(bayesplot)
+library(ggplot2)
+library(ggthemes)
+library(ggpubr)
+library(ggdist)
+library(scales)
+library(glue)
+library(rlist)
+library(rmarkdown)
+library(knitr)
+setwd(getwd())
+options(tibble.print_max = Inf, tibble.width = Inf)
+tableau10 = ggthemes_data[["tableau"]][["color-palettes"]][["regular"]][["Tableau 10"]] %>% pull(value)
+```
+
+# Overview
+
+This document is part of the supplemental materials for ACM CHI'24 paper titled "Evaluating the Utility of Conformal Prediction Sets for AI-Advised Image Labeling", with full reference provided below.
+
+<div style="text-align: left; margin: 20px auto; padding: 0 20px; width: 80%; font-family: \'Arial\', sans-serif;">
+Dongping Zhang, Angelos Chatzimparmpas, Negar Kamali, and Jessica Hullman. 2024.
+  Evaluating the Utility of Conformal Prediction Sets for AI-Advised Image Labeling.
+  In <em>Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI \'24),
+  May 11–16, 2024, Honolulu, HI, USA</em>. ACM, New York, NY, USA, 19 pages.
+  <a href="https://doi.org/10.1145/3613904.3642446">https://doi.org/10.1145/3613904.3642446</a>
+</div>
+
+In this document, we demonstrate our analysis, evaluate model fits, and reproduce the figures that we presented in the paper. This document is generated using `R` (version 4.3.1) with models fitted by `BRMS` (version 2.20.1). For access to the data and code used in our study, please visit our GitHub repository at: <https://github.com/dpzhang/conformal-prediction-utility>. If you have any questions or concerns, please reach out to the corresponding author via email: [dzhang@u.northwestern.edu](mailto:dzhang@u.northwestern.edu).
+
+**Note:** due to file size limitations imposed on supplemental materials, we are unable to include the fitted Bayesian models herein. However, we invite readers to replicate and refit our models using the code snippets provided below.
+
+# Load Pre-requisite files
+
+We first load all prerequisite files.
+
+```{r load prerequisites}
+source('./model-analysis.R')                      # helper functions
+modelDF = readRDS('./data/model.rds')             # collected response data
+```
+
+# Accuracy Model
+
+We fitted our accuracy model using the specification described in our [pre-registration](https://aspredicted.org/6gh27.pdf) using 4 chains with 10000 iterations and 5000 warmups.
+
+For the accuracy model, we use a Bernoulli distribution for the likelihood, which denotes the probability of a correct label. In our model specification, we model the logit of $p$ through interactions among all fixed effects and incorporate random intercepts and slopes for trial, grouped by participants' unique ID. This approach allows us to account for participants' baseline performance differences and variations in rates of change across conditions and trials.
+
+```{r acc}
+accFit = brm(
+  acc ~ trial * condition * ioblock * dbucket * sbucket + (1 + trial | userID),
+  family = bernoulli(link = "logit"),
+  data = modelDF,
+  # Weakly informative priors
+  prior = c(
+    prior(normal(0.584, 2.5), class = "Intercept"), # Centered at the mean accuracy
+    prior(normal(0, 2.5), class = 'b'),
+    prior(normal(0, 2.5), lb = 0, class = "sd"),
+    prior(normal(0, 1), lb = 0, class = "sd", group = "userID"),
+    prior(lkj(2), class = "cor")
+  ),
+  chains = 4,
+  cores = getOption("mc.cores", 4),
+  iter = 10000,
+  warmup = 5000,
+  control = list(adapt_delta = 0.8,
+                 max_treedepth = 10),
+  file = './fittedModels/accModel',
+  seed = 666
+)
+```
+
+Below, we present a summary of model estimates for the accuracy model.
+
+```{r print model estiates, echo=FALSE, results='markup'}
+tidy(accFit)
+```
+
+We present the distributions Rhat (Gelman-Rubin convergence diagnostic) and the number of effective sample size ratios for each model parameters in Figure \@ref(fig:acc-convergence). If chains are converged to equilibrium, the Rhats should be close to 1. Although our Rhats are not exactly at 1, they are very close to the target. Meanwhile, the effective sample size ratio (neff ratio) is a proxy for sampling efficiency. Ideally, we want the ratio to be as large as possible. All of our parameters has n_eff/N greater than 0.2, except 1, which shows our chains were able to identify effective samples sufficiently for most parameters.
+
+```{r acc-convergence, fig.cap="Convergence diagnostics for accuracy model: distribution of Rhats and Neff", fig.width=10, fig.align='center'}
+mcmc_convergence_check(accFit)$plot
+```
+
+We present the posterior predictive checks group by all manipulated experimental factors to evaluate model fits.
+
+```{r acc-pp-check, fig.cap="Posterior predictive checks for accuracy model", fig.width=10, fig.align='center'}
+posterior_predictive_check(accFit)
+```
+
+Here we reproduce the figure that is shown in the paper.
+
+```{r acc-effect, fig.cap = "Expected Accuracy predicted by all fixed effects with uncertainty quantified by 95% HPI", fig.width=10, fig.align='center'}
+accFit %>% 
+  generate_counterfactual %>%
+  plot_all_effects('acc') +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = NULL, y = "Accuracy") +
+  theme(strip.background = element_rect(color="black", linewidth=1, linetype="solid"))
+  
+```
+
+# Shortest Path Model
+
+We fitted a model for our shortest path (SP) length using the specification described in our [pre-registration](https://aspredicted.org/6gh27.pdf). Similar to the accuracy model, we used 4 chains with 10000 iterations and 5000 warmups.
+
+The SP length model is slightly more complex as we employ a Zero-inflated Negative Binomial (ZINB) model, which includes 2 components in the model specifications. They are the zero-inflation component and the negative binomial component. Section 3.6 of the paper provides detailed descriptions of model specification and prior choice.
+
+```{r sp model}
+spFit = brm(
+  bf(sp ~ trial * condition * ioblock * dbucket * sbucket + (1 + trial | userID),
+     zi ~ trial * condition * ioblock * dbucket * sbucket),
+  data = spModelDF,
+  family = zero_inflated_negbinomial(link = "log", link_zi = "logit"),
+  prior = c(
+    # Negative Binomial Priors
+    prior(normal(0, 5), class = "Intercept"), 
+    prior(normal(0, 2), class = "b"),
+    prior(student_t(3, 0, 2.5), class = "sd", group = "userID"),
+    prior(lkj(2), class = "cor"),
+    prior(exponential(0.1), class = "shape"), 
+    # Zero-inflation Model Priors
+    prior(normal(0, 5), class = "Intercept", dpar = "zi"), 
+    prior(normal(0, 2), class = "b", dpar = "zi")
+  ),
+  control = list(adapt_delta = 0.95,
+                 max_treedepth = 15),
+  cores = 4,
+  chains = 4,
+  iter = 10000,
+  warmup = 5000,
+  file = './fittedModels/spModel',
+  seed = 666
+)
+```
+
+Below, we present a summary of model estimates for the SP model.
+
+```{r spModel estiates, echo=FALSE, results='markup'}
+tidy(spFit)
+```
+
+We present the distributions Rhat and the number of effective sample size ratios for each model parameters in Figure \@ref(fig:sp-convergence). We find the parameter Rhats of the SP model are all close to the target of 1, and the effective sample size ratio (n_eff/N) are mostly greater than 0.2, which shows our chains were able to identify effective samples sufficiently.
+
+```{r sp-convergence, fig.cap="Convergence diagnostics for SP model: distribution of Rhats and Neff", fig.width=10, fig.align='center'}
+mcmc_convergence_check(spFit)$plot
+```
+
+We present the posterior predictive checks group by all manipulated experimental factors to evaluate model fits.
+
+```{r sp-pp-check, fig.cap="Posterior predictive checks for SP model", fig.width=10, fig.align='center'}
+posterior_predictive_check(spFit)
+```
+
+Here we reproduce the figure that is shown in the paper.
+
+```{r sp-effect, fig.cap = "Expected SP length predicted by all fixed effects with uncertainty quantified by 95% HPI", fig.width=10, fig.align='center'}
+spFit %>% 
+  generate_counterfactual %>%
+  plot_all_effects('sp') +
+  labs(x = NULL, y = "Shortest Path (SP) Length") +
+  theme(strip.background = element_rect(color="black", linewidth=1, linetype="solid"))
+```

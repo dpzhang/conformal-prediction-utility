@@ -1,0 +1,81 @@
+"file_index","class_id","class_name","entropy","corruption","severity","io","difficulty","size","top1_acc","top10_acc","raps_coverage","set_size"
+39915,798,"slide rule",7.21879243850708,"none",5,"In-distribution","Hard","Large",0,0,0,42
+40368,807,"solar thermal collector",4.5513162612915,"none",5,"In-distribution","Hard","Large",0,1,1,60
+42274,845,"syringe",3.94170784950256,"none",5,"In-distribution","Hard","Large",0,1,1,34
+14129,282,"tiger cat",1.49170529842377,"none",5,"In-distribution","Hard","Large",0,1,1,27
+9524,190,"Sealyham Terrier",1.48418509960175,"none",5,"In-distribution","Hard","Large",0,1,1,29
+37165,743,"prison",1.18142652511597,"none",5,"In-distribution","Hard","Large",1,1,1,42
+36759,735,"poncho",1.12006878852844,"none",5,"In-distribution","Hard","Large",1,1,1,53
+10037,200,"Tibetan Terrier",1.02542686462402,"none",5,"In-distribution","Hard","Large",1,1,1,49
+21136,422,"barbell",1.00168764591217,"none",5,"In-distribution","Hard","Large",1,1,1,154
+29555,591,"handkerchief",0.888755977153778,"none",5,"In-distribution","Hard","Large",1,1,1,21
+15770,315,"mantis",4.22138595581055,"none",5,"In-distribution","Hard","Small",0,1,1,8
+12009,240,"Appenzeller Sennenhund",3.49815797805786,"none",5,"In-distribution","Hard","Small",0,1,0,2
+32811,656,"minivan",1.91564548015594,"none",5,"In-distribution","Hard","Small",0,1,1,3
+4260,85,"quail",1.59685003757477,"none",5,"In-distribution","Hard","Small",0,1,1,3
+37423,748,"purse",1.2312616109848,"none",5,"In-distribution","Hard","Small",0,1,1,3
+40183,803,"snowplow",1.17509806156158,"none",5,"In-distribution","Hard","Small",0,1,1,11
+24308,486,"cello",0.95000958442688,"none",5,"In-distribution","Hard","Small",1,1,1,6
+25234,504,"coffee mug",0.754582107067108,"none",5,"In-distribution","Hard","Small",1,1,1,19
+10927,218,"Welsh Springer Spaniel",0.750229775905609,"none",5,"In-distribution","Hard","Small",1,1,1,15
+17516,350,"Alpine ibex",0.745000600814819,"none",5,"In-distribution","Hard","Small",1,1,1,10
+11615,232,"Border Collie",0.605401933193207,"none",5,"In-distribution","Easy","Large",1,1,1,12
+316,6,"stingray",0.575605988502502,"none",5,"In-distribution","Easy","Large",1,1,1,64
+14056,281,"tabby cat",0.575446903705597,"none",5,"In-distribution","Easy","Large",1,1,1,6
+10413,208,"Labrador Retriever",0.537437856197357,"none",5,"In-distribution","Easy","Large",1,1,1,10
+3853,77,"wolf spider",0.483641237020493,"none",5,"In-distribution","Easy","Large",1,1,1,11
+14827,296,"polar bear",0.475568890571594,"none",5,"In-distribution","Easy","Large",1,1,1,42
+13737,274,"dhole",0.371286064386368,"none",5,"In-distribution","Easy","Large",1,1,1,19
+25174,503,"cocktail shaker",0.350358456373215,"none",5,"In-distribution","Easy","Large",1,1,1,12
+41631,832,"stupa",0.342171132564545,"none",5,"In-distribution","Easy","Large",1,1,1,8
+8754,175,"Otterhound",0.330598592758179,"none",5,"In-distribution","Easy","Large",1,1,1,11
+43586,871,"trimaran",0.39609882235527,"none",5,"In-distribution","Easy","Small",1,1,1,3
+40124,802,"snowmobile",0.391278684139252,"none",5,"In-distribution","Easy","Small",1,1,1,5
+2065,41,"desert grassland whiptail lizard",0.35800501704216,"none",5,"In-distribution","Easy","Small",1,1,1,4
+8543,170,"Irish Wolfhound",0.352005124092102,"none",5,"In-distribution","Easy","Small",1,1,1,2
+5814,116,"chiton",0.330383509397507,"none",5,"In-distribution","Easy","Small",1,1,1,2
+10288,205,"Flat-Coated Retriever",0.318039983510971,"none",5,"In-distribution","Easy","Small",1,1,1,3
+49467,989,"rose hip",0.291591018438339,"none",5,"In-distribution","Easy","Small",1,1,1,4
+70,1,"goldfish",0.263475149869919,"none",5,"In-distribution","Easy","Small",1,1,1,1
+31062,621,"lawn mower",0.241280809044838,"none",5,"In-distribution","Easy","Small",1,1,1,1
+2447,48,"Komodo dragon",0.211967021226883,"none",5,"In-distribution","Easy","Small",1,1,1,1
+48694,973,"coral reef",6.11575746536255,"defocus_blur",5,"Out-of-distribution","Hard","Large",0,0,1,118
+17086,341,"pig",4.41586065292358,"defocus_blur",5,"Out-of-distribution","Hard","Large",0,0,1,76
+8548,170,"Irish Wolfhound",5.48982763290405,"defocus_blur",5,"Out-of-distribution","Hard","Small",0,1,1,25
+33464,669,"mosquito net",3.58064794540405,"defocus_blur",5,"Out-of-distribution","Hard","Small",0,1,1,29
+2991,59,"vine snake",0.709868371486664,"defocus_blur",5,"Out-of-distribution","Easy","Large",1,1,1,53
+26865,537,"dog sled",0.703881859779358,"defocus_blur",5,"Out-of-distribution","Easy","Large",1,1,1,15
+8161,163,"Bloodhound",0.620925068855286,"defocus_blur",5,"Out-of-distribution","Easy","Small",1,1,1,6
+17873,357,"mink",0.524717450141907,"defocus_blur",5,"Out-of-distribution","Easy","Small",1,1,1,4
+42937,858,"tile roof",5.95617961883545,"frost",5,"Out-of-distribution","Hard","Large",0,0,1,81
+1287,25,"fire salamander",3.2105598449707,"frost",5,"Out-of-distribution","Hard","Large",0,1,1,87
+5621,112,"conch",6.91638469696045,"frost",5,"Out-of-distribution","Hard","Small",0,0,0,20
+17830,356,"weasel",5.50295162200928,"frost",5,"Out-of-distribution","Hard","Small",0,0,1,46
+39559,791,"shopping cart",0.569692254066467,"frost",5,"Out-of-distribution","Easy","Large",1,1,1,36
+16476,329,"sea cucumber",0.326924353837967,"frost",5,"Out-of-distribution","Easy","Large",1,1,1,9
+4131,82,"ruffed grouse",0.456474035978317,"frost",5,"Out-of-distribution","Easy","Small",1,1,1,8
+5495,109,"brain coral",0.398578315973282,"frost",5,"Out-of-distribution","Easy","Small",1,1,1,3
+41055,821,"through arch bridge",7.47830200195312,"glass_blur",5,"Out-of-distribution","Hard","Large",0,0,0,105
+7213,144,"pelican",6.01620244979858,"glass_blur",5,"Out-of-distribution","Hard","Large",0,0,1,103
+37493,749,"quill",5.9636058807373,"glass_blur",5,"Out-of-distribution","Hard","Small",0,0,1,28
+45696,913,"shipwreck",2.49333500862122,"glass_blur",5,"Out-of-distribution","Hard","Small",0,1,1,45
+42742,854,"front curtain",0.391419112682343,"glass_blur",5,"Out-of-distribution","Easy","Large",1,1,1,13
+16923,338,"guinea pig",0.382671713829041,"glass_blur",5,"Out-of-distribution","Easy","Large",1,1,1,16
+6772,135,"limpkin",0.478323966264725,"glass_blur",5,"Out-of-distribution","Easy","Small",1,1,1,6
+3809,76,"tarantula",0.329815447330475,"glass_blur",5,"Out-of-distribution","Easy","Small",1,1,1,2
+15427,308,"fly",5.10893487930298,"snow",5,"Out-of-distribution","Hard","Large",0,0,1,118
+6040,120,"fiddler crab",1.10544896125793,"snow",5,"Out-of-distribution","Hard","Large",1,1,1,78
+6318,126,"isopod",5.49546337127686,"snow",5,"Out-of-distribution","Hard","Small",0,1,1,23
+5729,114,"slug",4.08093547821045,"snow",5,"Out-of-distribution","Hard","Small",0,1,1,23
+41666,833,"submarine",0.60595166683197,"snow",5,"Out-of-distribution","Easy","Large",1,1,1,40
+15179,303,"longhorn beetle",0.399506539106369,"snow",5,"Out-of-distribution","Easy","Large",1,1,1,22
+1350,27,"newt",0.534269988536835,"snow",5,"Out-of-distribution","Easy","Small",1,1,1,7
+28892,577,"gong",0.470783084630966,"snow",5,"Out-of-distribution","Easy","Small",1,1,1,2
+11842,236,"Dobermann",5.81287717819214,"zoom_blur",5,"Out-of-distribution","Hard","Large",0,0,1,68
+3326,66,"Saharan horned viper",5.63517379760742,"zoom_blur",5,"Out-of-distribution","Hard","Large",0,0,1,74
+15008,300,"tiger beetle",6.19775295257568,"zoom_blur",5,"Out-of-distribution","Hard","Small",0,0,1,18
+39738,794,"shower curtain",5.13630390167236,"zoom_blur",5,"Out-of-distribution","Hard","Small",0,1,1,44
+5581,111,"nematode",0.619137227535248,"zoom_blur",5,"Out-of-distribution","Easy","Large",1,1,1,57
+47624,952,"fig",0.381365537643433,"zoom_blur",5,"Out-of-distribution","Easy","Large",1,1,1,20
+36195,723,"pinwheel",0.574349224567413,"zoom_blur",5,"Out-of-distribution","Easy","Small",1,1,1,6
+29679,593,"harmonica",0.299072533845901,"zoom_blur",5,"Out-of-distribution","Easy","Small",1,1,1,6
