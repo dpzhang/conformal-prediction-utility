@@ -2,6 +2,8 @@
 
 Authors: Dongping Zhang, Angelos Chatzimparmpas, Negar Kamali, Jessica Hullman
 
+Full Paper: https://doi.org/10.1145/3613904.3642446
+
 arXiv: https://arxiv.org/abs/2401.08876
 
 ## About this repository:
